@@ -25,13 +25,13 @@ interface IItem
 
     IItem getParent ();
     int getChildCount ();
-    Iterator /* IItem */ getChildren ();
+    Iterator<IItem> getChildren ();
     /**
      * 
      * @param order [null is equivalent to no sort]
      * @return
      */
-    Iterator /* IItem */ getChildren (ItemComparator /* IItem */ order);
+    Iterator<IItem> getChildren (ItemComparator order);
     
     String getName ();   
     IItemMetadata getMetadata ();

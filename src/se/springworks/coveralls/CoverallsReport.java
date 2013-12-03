@@ -1,5 +1,6 @@
 package se.springworks.coveralls;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,12 +51,18 @@ public class CoverallsReport {
 	            matcher.appendReplacement(replaced, "\n");
 	        }
 	        matcher.appendTail(replaced);
+	        System.out.println(name + " has " + lines + " lines");
 	        this.source = replaced.toString();
 	        this.coverage = new Integer[lines];
 	        this.name = name;
 		}
 		
 		public void addCoverage(int line) {
+			System.out.println(line + " " + coverage);
+			System.out.println("covlen = " + coverage.length);
+			if(coverage[line - 1] == null) {
+				coverage[line - 1] = 0;
+			}
 			coverage[line - 1]++;
 		}
 	}
@@ -68,7 +75,7 @@ public class CoverallsReport {
 	private String serviceName;
 	
 	@JsonProperty
-	private List<SourceFile> sourceFiles;
+	private List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
 	
 	
 	public void addSourceFile(SourceFile sf) {

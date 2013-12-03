@@ -50,10 +50,10 @@ final class ReportDataModel implements IReportDataModel
                 throw new IllegalStateException ("source file data view requested for metadata with incomplete SourceFile debug info");
 
             final AllItem root = new AllItem ();
-            final Map /* String(pkg name) -> PackageItem */ packageMap = new HashMap ();
-            final Map /* String(pkg-prefixed src file name) -> ClassItem */ srcfileMap = new HashMap ();
+            final Map<String, PackageItem> packageMap = new HashMap<String, PackageItem> ();
+            final Map<String, SrcFileItem> srcfileMap = new HashMap<String, SrcFileItem> ();
             
-            for (Iterator /* ClassDescriptor */ descriptors = m_mdata.iterator (); descriptors.hasNext (); )
+            for (Iterator<ClassDescriptor> descriptors = m_mdata.iterator (); descriptors.hasNext (); )
             {    
                 final ClassDescriptor cls = (ClassDescriptor) descriptors.next ();
                 String packageVMName = cls.getPackageVMName ();

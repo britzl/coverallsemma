@@ -35,7 +35,12 @@ final class MetaData implements IMetaData, Cloneable
     // TODO: no duplicate detection is done here at the moment
     // [may require supporting fast lookup for already added descriptors]
     
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	public IMetaData shallowCopy ()
     {
         final MetaData _clone;
@@ -48,11 +53,11 @@ final class MetaData implements IMetaData, Cloneable
             throw new Error (cnse.toString ());
         }
         
-        final HashMap _classMap;
+        final HashMap<String, ClassDescriptor> _classMap;
         
         synchronized (lock ())
         {
-            _classMap = (HashMap) m_classMap.clone ();
+            _classMap = (HashMap<String, ClassDescriptor>) m_classMap.clone ();
         }
         
         // [m_packagesWarned is not cloned by design]
@@ -87,7 +92,7 @@ final class MetaData implements IMetaData, Cloneable
     }
     
     @Override
-	public Iterator iterator ()
+	public Iterator<ClassDescriptor> iterator ()
     {
         return m_classMap.values ().iterator ();
     }
@@ -181,16 +186,16 @@ final class MetaData implements IMetaData, Cloneable
         else
         {
             final MetaData rhsmdata = (MetaData) rhs; // TODO: redesign to avoid this cast?
-            final Map rhsclasses = rhsmdata.m_classMap;
+            final Map<String, ClassDescriptor> rhsclasses = rhsmdata.m_classMap;
             
             // rhs entries always override existing content:
             
-            for (Iterator entries = rhsclasses.entrySet ().iterator (); entries.hasNext (); )
+            for (Iterator<Map.Entry<String, ClassDescriptor>> entries = rhsclasses.entrySet ().iterator (); entries.hasNext (); )
             {
-                final Map.Entry entry = (Map.Entry) entries.next ();
+                final Map.Entry<String, ClassDescriptor> entry = entries.next ();
                 
-                final String classVMName = (String) entry.getKey ();
-                final Object rhsdescriptor = entry.getValue ();
+                final String classVMName = entry.getKey ();
+                final ClassDescriptor rhsdescriptor = entry.getValue ();
                     
                 m_classMap.put (classVMName, rhsdescriptor);
             }
@@ -217,8 +222,8 @@ final class MetaData implements IMetaData, Cloneable
         m_hasSrcFileInfo = true;
         m_hasLineNumberInfo = true;
         
-        m_classMap = new HashMap ();
-        m_packagesWarned = new HashSet ();
+        m_classMap = new HashMap<String, ClassDescriptor> ();
+        m_packagesWarned = new HashSet<String> ();
     }
     
     
@@ -231,7 +236,7 @@ final class MetaData implements IMetaData, Cloneable
         final boolean hasLineNumberInfo = in.readBoolean ();
         
         final int size = in.readInt ();
-        final HashMap classMap = new HashMap (size);
+        final HashMap<String, ClassDescriptor> classMap = new HashMap<String, ClassDescriptor> (size);
         
         for (int i = 0; i < size; ++ i)
         {
@@ -254,18 +259,18 @@ final class MetaData implements IMetaData, Cloneable
         out.writeBoolean (mdata.m_hasSrcFileInfo);
         out.writeBoolean (mdata.m_hasLineNumberInfo);
         
-        final Map classMap = mdata.m_classMap;
+        final Map<String, ClassDescriptor> classMap = mdata.m_classMap;
         
         final int size = classMap.size ();
         out.writeInt (size); // too bad the capacity is not visible
         
-        final Iterator entries = classMap.entrySet ().iterator ();
+        final Iterator<Map.Entry<String, ClassDescriptor>> entries = classMap.entrySet ().iterator ();
         for (int i = 0; i < size; ++ i)
         {
-            final Map.Entry entry = (Map.Entry) entries.next ();
+            final Map.Entry<String, ClassDescriptor> entry = entries.next ();
             
-            final String classVMName = (String) entry.getKey ();
-            final ClassDescriptor cls = (ClassDescriptor) entry.getValue ();
+            final String classVMName = entry.getKey ();
+            final ClassDescriptor cls = entry.getValue ();
             
             out.writeUTF (classVMName);
             ClassDescriptor.writeExternal (cls, out);
@@ -277,7 +282,7 @@ final class MetaData implements IMetaData, Cloneable
     // private: ...............................................................
     
     
-    private MetaData (final CoverageOptions options, final HashMap classMap,
+    private MetaData (final CoverageOptions options, final HashMap<String, ClassDescriptor> classMap,
                       final boolean hasSrcFileInfo, final boolean hasLineNumberInfo)
     {
         if ($assert.ENABLED) $assert.ASSERT (options != null, "options is null");
@@ -292,9 +297,9 @@ final class MetaData implements IMetaData, Cloneable
     
     private final CoverageOptions m_options; // [never null]
     private boolean m_hasSrcFileInfo, m_hasLineNumberInfo;
-    private /*final*/ HashMap /* classVMName:String->ClassDescriptor */ m_classMap; // [never null]
+    private /*final*/ HashMap<String, ClassDescriptor> m_classMap; // [never null]
     
-    private /*final*/ transient HashSet /*  packageVMName:String */ m_packagesWarned; // [never null]
+    private /*final*/ transient HashSet<String> m_packagesWarned; // [never null]
 
 } // end of class
 // ----------------------------------------------------------------------------

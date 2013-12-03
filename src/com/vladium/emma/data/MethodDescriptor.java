@@ -31,7 +31,12 @@ final class MethodDescriptor implements IConstants, IMetadataConstants, Serializ
     // and for a class that is never loaded I can't find out the number of
     // blocks for block coverage reporting
 
-    public MethodDescriptor (final String name, final String descriptor, final int status,
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MethodDescriptor (final String name, final String descriptor, final int status,
                              final int [] blockSizes, final int [][] blockMap, final int firstLine)
     {
         if (name == null)

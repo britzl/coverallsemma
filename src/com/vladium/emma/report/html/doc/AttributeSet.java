@@ -53,11 +53,11 @@ abstract class AttributeSet implements IContent
 		public void emit (final HTMLWriter out)
         {
             boolean first = true;
-            for (Iterator a = m_attrMap.entrySet ().iterator (); a.hasNext (); )
+            for (Iterator<Map.Entry<Attribute, Object>> a = m_attrMap.entrySet ().iterator (); a.hasNext (); )
             {
-                final Map.Entry entry = (Map.Entry) a.next ();
+                final Map.Entry<Attribute, Object> entry = a.next ();
                 
-                final Attribute attr = (Attribute) entry.getKey ();
+                final Attribute attr = entry.getKey ();
                 final String value = entry.getValue ().toString ();
                 
                 if (first)
@@ -106,11 +106,11 @@ abstract class AttributeSet implements IContent
         
         AttributeSetImpl ()
         {
-            m_attrMap = new HashMap ();
+            m_attrMap = new HashMap<Attribute, Object> ();
         }
         
         // TODO: consider lazy-initing this
-        private final Map /* Attribute->String|Integer */ m_attrMap; // never null
+        private final Map<Attribute, Object> m_attrMap; // never null
         private StringBuffer m_buf; // reused by emit() 
         
         private static final int MAX_BUF_LENGTH = 4 * 1024;

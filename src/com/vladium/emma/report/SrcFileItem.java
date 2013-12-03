@@ -105,7 +105,7 @@ final class SrcFileItem extends Item
                     aggregates [TOTAL_CLASS_COUNT] = getChildCount ();
                     
                     value = 0;
-                    for (Iterator children = getChildren (); children.hasNext (); )
+                    for (Iterator<IItem> children = getChildren (); children.hasNext (); )
                     {
                         // SF BUG 972725: this was incorrectly using 'type' instead
                         // of the COVERAGE_CLASS_COUNT aggregate type, making class
@@ -139,7 +139,7 @@ final class SrcFileItem extends Item
                     
                     final IntObjectMap /* line -> int[2] */ fldata = new IntObjectMap ();
                     
-                    for (Iterator classes = getChildren (); classes.hasNext (); )
+                    for (Iterator<IItem> classes = getChildren (); classes.hasNext (); )
                     {
                         final ClassItem cls = (ClassItem) classes.next ();
                     
@@ -147,7 +147,7 @@ final class SrcFileItem extends Item
                         final ClassDescriptor clsdesc = cls.getClassDescriptor ();
                         final MethodDescriptor [] methoddescs = clsdesc.getMethods ();
                         
-                        for (Iterator methods = cls.getChildren (); methods.hasNext (); )
+                        for (Iterator<IItem> methods = cls.getChildren (); methods.hasNext (); )
                         {
                             final MethodItem method = (MethodItem) methods.next ();
                             final int methodID = method.getID ();

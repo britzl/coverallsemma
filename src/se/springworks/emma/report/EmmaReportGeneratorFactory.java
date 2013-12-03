@@ -2,7 +2,6 @@ package se.springworks.emma.report;
 
 import java.util.HashMap;
 
-import com.vladium.emma.report.AbstractReportGenerator;
 import com.vladium.emma.report.IReportGenerator;
 
 public class EmmaReportGeneratorFactory {

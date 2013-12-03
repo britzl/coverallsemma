@@ -335,7 +335,11 @@ abstract class Property
         // uses a virtual call to the same instead of delegating to getProperty())
         // I must override both methods below
         
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		@Override
 		public String getProperty (final String key)
         {
             faultContents ();
@@ -417,7 +421,13 @@ abstract class Property
         // uses a virtual call to the same instead of delegating to getProperty())
         // I must override both methods below
         
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+
+		@Override
 		public String getProperty (final String key)
         {
             return (String) get (key);

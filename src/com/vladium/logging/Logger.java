@@ -584,14 +584,14 @@ final class Logger implements ILogLevels
         final Set filter;
         {
             final String _filter = properties.getProperty (AppLoggers.PROPERTY_VERBOSITY_FILTER);
-            Set temp = null;
+            Set<String> temp = null;
             
             if (_filter != null)
             {
                 final StringTokenizer tokenizer = new StringTokenizer (_filter, COMMA_DELIMITERS);
                 if (tokenizer.countTokens () > 0)
                 {
-                    temp = new HashSet (tokenizer.countTokens ());
+                    temp = new HashSet<String> (tokenizer.countTokens ());
                     while (tokenizer.hasMoreTokens ())
                     {
                         temp.add (tokenizer.nextToken ());

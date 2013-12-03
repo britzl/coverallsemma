@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import com.sun.org.apache.xml.internal.utils.IntVector;
 import com.vladium.emma.EMMARuntimeException;
 import com.vladium.emma.data.ClassDescriptor;
 import com.vladium.emma.data.ICoverageData;
@@ -121,13 +120,13 @@ abstract class AbstractReportGenerator extends AbstractItemVisitor
         // SF FR 971176: provide user with sample classes that caused the above warnings
         if (debugInfoWarning && m_log.atINFO ())
         {
-            final Set /* String */ sampleClassNames = new TreeSet ();
+            final Set<String> sampleClassNames = new TreeSet<String> ();
             final ObjectIntMap /* packageVMName:String -> count:int */ countMap = new ObjectIntMap ();
             final int [] _count = new int [1];
             
-            for (Iterator /* ClassDescriptor */ descriptors = mdata.iterator (); descriptors.hasNext (); )
+            for (Iterator<ClassDescriptor> descriptors = mdata.iterator (); descriptors.hasNext (); )
             {    
-                final ClassDescriptor cls = (ClassDescriptor) descriptors.next ();
+                final ClassDescriptor cls = descriptors.next ();
                 
                 // SF BUG 979717: this check was incorrectly absent in the initial FR impl:
                 if (! cls.hasCompleteLineNumberInfo () || ! cls.hasSrcFileInfo ())
@@ -146,7 +145,7 @@ abstract class AbstractReportGenerator extends AbstractItemVisitor
             }
             
             m_log.info ("showing up to " + MAX_DEBUG_INFO_WARNING_COUNT + " classes without full debug info per package:");
-            for (Iterator /* String */ names = sampleClassNames.iterator (); names.hasNext (); )
+            for (Iterator<String> names = sampleClassNames.iterator (); names.hasNext (); )
             {
                 m_log.info ("  " + names.next ());
             }

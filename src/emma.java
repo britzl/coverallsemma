@@ -21,7 +21,7 @@ final class emma
     
     // TODO: set m_out consistently with LoggerInit    
 	
-	private static final String ARGS[] = { "report", "-r", "html", "-in", "coverage.em,coverage.ec", "-sp", "../androidutils-lib/src/" };
+	private static final String ARGS[] = { "report", "-r", "html,coveralls", "-in", "coverage.em,coverage.ec", "-sp", "../androidutils/androidutils-lib/src/" };
     
     public static void main (String [] args)
         throws EMMARuntimeException

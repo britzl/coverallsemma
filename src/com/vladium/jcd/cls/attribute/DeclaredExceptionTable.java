@@ -11,7 +11,6 @@ package com.vladium.jcd.cls.attribute;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.sun.org.apache.xml.internal.utils.IntVector;
 import com.vladium.jcd.lib.UDataOutputStream;
 
 // ----------------------------------------------------------------------------

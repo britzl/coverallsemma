@@ -20,6 +20,11 @@ class EMMARuntimeException extends AbstractRuntimeException
     // public: ................................................................
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructs an exception with null message and null cause.
      */    
     public EMMARuntimeException ()

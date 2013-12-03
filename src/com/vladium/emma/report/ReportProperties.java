@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import com.sun.org.apache.xml.internal.utils.IntVector;
 import com.vladium.emma.EMMARuntimeException;
 import com.vladium.emma.IAppErrorCodes;
 import com.vladium.util.Files;
@@ -321,7 +320,7 @@ abstract class ReportProperties implements IAppErrorCodes
             result.setDepth (IItemMetadata.TYPE_ID_SRCFILE);
         }
         
-        final Set /* String */ columnNames = new HashSet ();
+        final Set<String> columnNames = new HashSet<String> ();
         {
             final String columnList = getReportProperty (properties, type, IReportProperties.COLUMNS, false, IReportProperties.DEFAULT_COLUMNS);
             final Vector<Integer> _columns = new Vector<Integer> ();

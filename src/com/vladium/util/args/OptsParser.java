@@ -47,9 +47,9 @@ final class OptsParser implements IOptsParser
         
         final String prefix = OPT_PREFIXES [CANONICAL_OPT_PREFIX];
         
-        for (Iterator i = m_metadata.getOptDefs (); i.hasNext (); )
+        for (Iterator<OptDef> i = m_metadata.getOptDefs (); i.hasNext (); )
         {
-            final OptDef optdef = (OptDef) i.next ();
+            final OptDef optdef = i.next ();
             
             if ((level < 2) && optdef.isDetailedOnly ()) // skip detailed usage only options 
                 continue;
@@ -336,7 +336,7 @@ final class OptsParser implements IOptsParser
         {
             // validation: all required parameters must be specified
             
-            final Set /* String(canonical name) */ required = new HashSet ();
+            final Set<String> required = new HashSet<String> ();
             required.addAll (m_metadata.getRequiredOpts ());
             
             for (int s = 0; s < specified.length; ++ s)
@@ -346,9 +346,9 @@ final class OptsParser implements IOptsParser
             
             if (! required.isEmpty ())
             {
-                for (Iterator i = required.iterator (); i.hasNext (); )
+                for (Iterator<String> i = required.iterator (); i.hasNext (); )
                 {
-                    opts.addError (formatMessage ("missing required option \'" + (String) i.next () + "\'"));
+                    opts.addError (formatMessage ("missing required option \'" + i.next () + "\'"));
                 }
             }
             
@@ -603,7 +603,7 @@ final class OptsParser implements IOptsParser
             // TODO: use width
             if (hasErrors ())
             {
-                for (Iterator i = m_errors.iterator (); i.hasNext (); )
+                for (Iterator<String> i = m_errors.iterator (); i.hasNext (); )
                 {
                     out.println (i.next ());
                 }
@@ -640,7 +640,7 @@ final class OptsParser implements IOptsParser
         {
             if (hasErrors ()) return null;
             
-            final List /* Opt */ patternOpts = (List) m_patternMap.get (pattern);
+            final List<Opt> patternOpts = m_patternMap.get (pattern);
             
             if ((patternOpts == null) || patternOpts.isEmpty ())
                 return EMPTY_OPT_ARRAY;

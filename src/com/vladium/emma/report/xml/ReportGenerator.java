@@ -411,9 +411,9 @@ final class ReportGenerator extends AbstractReportGenerator
         
         if (deeper)
         {
-            for (Iterator packages = item.getChildren (childrenOrder); packages.hasNext (); )
+            for (Iterator<IItem> packages = item.getChildren (childrenOrder); packages.hasNext (); )
             {
-                ((IItem) packages.next ()).accept (this, null);
+                (packages.next ()).accept (this, null);
             }
             
             eol ();

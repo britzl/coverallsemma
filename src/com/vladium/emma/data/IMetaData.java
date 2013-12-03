@@ -32,7 +32,7 @@ interface IMetaData extends IMergeable
 //    boolean hasDescriptor (ClassDescriptor cls);
     boolean hasDescriptor (String classVMName);
     
-    Iterator /* ClassDescripor */ iterator ();
+    Iterator<ClassDescriptor> iterator ();
     
     //void setImmutable (); // TODO: this only disables add(); rename
     boolean add (ClassDescriptor cls, boolean overwrite);    

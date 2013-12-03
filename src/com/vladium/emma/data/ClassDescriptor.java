@@ -26,7 +26,11 @@ final class ClassDescriptor implements IConstants, Serializable
     // public: ................................................................
     
     
-    public ClassDescriptor (final String packageVMName, final String name, final long stamp,
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public ClassDescriptor (final String packageVMName, final String name, final long stamp,
                             final String srcFileName,
                             final MethodDescriptor [] methods)
     {

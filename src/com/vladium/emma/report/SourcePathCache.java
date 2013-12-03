@@ -93,10 +93,10 @@ final class SourcePathCache
             m_packageCache.put (packageVMName, entry);
         }
         
-        final Set [] listings = entry.m_listings;
+        final Set<String> [] listings = entry.m_listings;
         for (int p = 0; p < listings.length; ++ p)
         {
-            Set listing = listings [p];
+            Set<String> listing = listings [p];
             if (listing == null)
             {
                 listing = faultListing (m_sourcepath [p], packageVMName);
@@ -192,7 +192,7 @@ final class SourcePathCache
     } // end of nested class
     
     
-    private Set /* String */ faultListing (final File dir, final String packageVMName)
+    private Set<String> faultListing (final File dir, final String packageVMName)
     {
         if ($assert.ENABLED) $assert.ASSERT (dir != null, "dir = null");
         if ($assert.ENABLED) $assert.ASSERT (packageVMName != null, "packageVMName = null");
@@ -202,10 +202,10 @@ final class SourcePathCache
         final File [] listing = packageFile.listFiles (FILE_EXTENSION_FILTER);
         
         if ((listing == null) || (listing.length == 0))
-            return Collections.EMPTY_SET;
+            return Collections.<String>emptySet();
         else
         {
-            final Set result = new HashSet (listing.length);
+            final Set<String> result = new HashSet<String> (listing.length);
             for (int f = 0; f < listing.length; ++ f)
             {
                 result.add (listing [f].getName ());

@@ -15,11 +15,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.WeakHashMap;
 
+import com.vladium.emma.report.IReportProperties;
+import com.vladium.emma.report.ReportProperties;
 import com.vladium.util.ClassLoaderResolver;
 import com.vladium.util.IProperties;
 import com.vladium.util.Property;
-import com.vladium.emma.report.IReportProperties;
-import com.vladium.emma.report.ReportProperties;
 
 // ----------------------------------------------------------------------------
 /**
@@ -58,7 +58,7 @@ abstract class EMMAProperties
     
     public static final String PROPERTY_TEMP_FILE_EXT           = ".et";
     
-    public static final Map SYSTEM_PROPERTY_REDIRECTS; // set in <clinit>
+    public static final Map<String, String> SYSTEM_PROPERTY_REDIRECTS; // set in <clinit>
     
     
     /**
@@ -124,7 +124,7 @@ abstract class EMMAProperties
 
     public static synchronized IProperties getAppProperties (final ClassLoader loader)
     {
-        IProperties properties = (IProperties) s_properties.get (loader);
+        IProperties properties = s_properties.get (loader);
 
         if (properties != null)
             return properties;
@@ -183,13 +183,13 @@ abstract class EMMAProperties
     
     private static long s_timestamp;
     
-    private static final Map /* ClassLoader->Properties */ s_properties; // set in <clinit>
+    private static final Map<ClassLoader, IProperties> s_properties; // set in <clinit>
     
     static
     {
-        s_properties = new WeakHashMap ();
+        s_properties = new WeakHashMap<ClassLoader, IProperties> ();
         
-        final Map redirects = new HashMap ();
+        final Map<String, String> redirects = new HashMap<String, String> ();
         redirects.put (IReportProperties.PREFIX.concat (IReportProperties.OUT_ENCODING),
                        "file.encoding");
         redirects.put (IReportProperties.PREFIX.concat (IReportProperties.OUT_DIR),

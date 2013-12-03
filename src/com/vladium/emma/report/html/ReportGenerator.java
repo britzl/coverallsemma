@@ -117,7 +117,7 @@ final class ReportGenerator extends AbstractReportGenerator
             
             for (m_queue.add (m_view.getRoot ()); ! m_queue.isEmpty (); )
             {
-                final IItem head = (IItem) m_queue.removeFirst ();
+                final IItem head = m_queue.removeFirst ();
                 
                 head.accept (this, null);
             }
@@ -335,7 +335,7 @@ final class ReportGenerator extends AbstractReportGenerator
     @Override
 	public Object visit (final PackageItem item, final Object ctx)
     {
-    	m_log.info("visit() PackageItem " + item.getName());
+    	m_log.info("visit() " + item.getName());
         HTMLWriter out = null;
         try
         {
@@ -403,7 +403,6 @@ final class ReportGenerator extends AbstractReportGenerator
             page.add (summaryTable);
             
             final boolean deeper = (m_settings.getDepth () > item.getMetadata ().getTypeID ());
-            m_log.info("depth = " + m_settings.getDepth ());
             // render child summary tables on the same page:
             
             final String summaryTitle = m_srcView ? "COVERAGE BREAKDOWN BY SOURCE FILE" : "COVERAGE BREAKDOWN BY CLASS";
@@ -429,7 +428,6 @@ final class ReportGenerator extends AbstractReportGenerator
                     String childHREF = null;
                     if (deeper)
                     {
-                    	m_log.info("DEEPER");
                         childHREF = getItemHREF (item, srcORcls);
                     }
                     addItemRow (srcORcls, odd, childSummaryTable, headerColumns, childHREF, false);
@@ -456,7 +454,7 @@ final class ReportGenerator extends AbstractReportGenerator
 	public Object visit (final SrcFileItem item, final Object ctx)
     {
         // this visit only takes place in src views
-    	m_log.info("visit() SrcFileItem " + item);
+    	m_log.info("visit() " + item.getName());
         
         HTMLWriter out = null;
         try
@@ -940,12 +938,10 @@ final class ReportGenerator extends AbstractReportGenerator
             
             if (attr != null)
             {
-                m_log.info(attr.getName() + " namehref = " + nameHREF);
                 final HTMLTable.ICell cell = row.newCell ();
                 
                 if ((nameHREF != null) && (attrID == IItemAttribute.ATTRIBUTE_NAME_ID))
                 {
-                	m_log.info("wagga");
                     buf.setLength (0);
                     attr.format (item, buf);
                     

@@ -27,7 +27,13 @@ final class CoverageData implements ICoverageData, Cloneable
     
     // TODO: duplicate issue
        
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	@Override
 	public Object lock ()
     {
         return m_coverageMap;
@@ -46,11 +52,11 @@ final class CoverageData implements ICoverageData, Cloneable
             throw new Error (cnse.toString ());
         }
         
-        final HashMap _coverageMap;
+        final HashMap<String, DataHolder> _coverageMap;
         
         synchronized (lock ())
         {
-            _coverageMap = (HashMap) m_coverageMap.clone ();
+            _coverageMap = (HashMap<String, DataHolder>) m_coverageMap.clone ();
         }
         
         _clone.m_coverageMap = _coverageMap;
@@ -100,14 +106,14 @@ final class CoverageData implements ICoverageData, Cloneable
         else
         {
             final CoverageData rhscdata = (CoverageData) rhs; // TODO: redesign so that the cast is not necessary
-            final Map rhscoverageData = rhscdata.m_coverageMap;
+            final Map<String, DataHolder> rhscoverageData = rhscdata.m_coverageMap;
             
-            for (Iterator entries = rhscoverageData.entrySet ().iterator (); entries.hasNext (); )
+            for (Iterator<Map.Entry<String, DataHolder>> entries = rhscoverageData.entrySet ().iterator (); entries.hasNext (); )
             {
-                final Map.Entry entry = (Map.Entry) entries.next ();
-                final String classVMName = (String) entry.getKey ();
+                final Map.Entry<String, DataHolder> entry = entries.next ();
+                final String classVMName = entry.getKey ();
                 
-                final DataHolder rhsdata = (DataHolder) entry.getValue ();
+                final DataHolder rhsdata = entry.getValue ();
                 // [assertion: rhsdata != null]
                 
                 final DataHolder data = (DataHolder) m_coverageMap.get (classVMName);
@@ -163,7 +169,7 @@ final class CoverageData implements ICoverageData, Cloneable
     
     CoverageData ()
     {
-        m_coverageMap = new HashMap ();
+        m_coverageMap = new HashMap<String, DataHolder> ();
     }
     
     
@@ -171,7 +177,7 @@ final class CoverageData implements ICoverageData, Cloneable
         throws IOException
     {
         final int size = in.readInt ();
-        final HashMap coverageMap = new HashMap (size);
+        final HashMap<String, DataHolder> coverageMap = new HashMap<String, DataHolder> (size);
         
         for (int i = 0; i < size; ++ i)
         {
@@ -194,15 +200,15 @@ final class CoverageData implements ICoverageData, Cloneable
     static void writeExternal (final CoverageData cdata, final DataOutput out)
         throws IOException
     {
-        final Map coverageMap = cdata.m_coverageMap;
+        final Map<String, DataHolder> coverageMap = cdata.m_coverageMap;
         
         final int size = coverageMap.size ();
         out.writeInt (size);
         
-        final Iterator entries = coverageMap.entrySet ().iterator ();
+        final Iterator<Map.Entry<String, DataHolder>> entries = coverageMap.entrySet ().iterator ();
         for (int i = 0; i < size; ++ i)
         {
-            final Map.Entry entry = (Map.Entry) entries.next ();
+            final Map.Entry<String, DataHolder> entry = entries.next ();
             
             final String classVMName = (String) entry.getKey ();
             final DataHolder data = (DataHolder) entry.getValue ();
@@ -224,14 +230,14 @@ final class CoverageData implements ICoverageData, Cloneable
     // private: ...............................................................
     
     
-    private CoverageData (final HashMap coverageMap)
+    private CoverageData (final HashMap<String, DataHolder> coverageMap)
     {
         if ($assert.ENABLED) $assert.ASSERT (coverageMap != null, "coverageMap is null");
         m_coverageMap = coverageMap;
     }
     
     
-    private /*final*/ HashMap /* String(classVMName) -> DataHolder */ m_coverageMap; // never null
+    private /*final*/ HashMap<String, DataHolder> m_coverageMap; // never null
 
 } // end of class
 // ----------------------------------------------------------------------------

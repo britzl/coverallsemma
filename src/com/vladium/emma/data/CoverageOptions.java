@@ -22,7 +22,11 @@ final class CoverageOptions implements Serializable
 {
     // public: ................................................................
     
-    public boolean excludeSyntheticMethods ()
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public boolean excludeSyntheticMethods ()
     {
         return m_excludeSyntheticMethods;
     }

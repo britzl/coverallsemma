@@ -119,7 +119,7 @@ final class ClassItem extends Item
                     final IntObjectMap /* line -> int[2] */ cldata = new IntObjectMap ();
                     final MethodDescriptor [] methoddescs = m_cls.getMethods ();
                         
-                    for (Iterator methods = getChildren (); methods.hasNext (); )
+                    for (Iterator<IItem> methods = getChildren (); methods.hasNext (); )
                     {
                         final MethodItem method = (MethodItem) methods.next ();
                         final int methodID = method.getID ();

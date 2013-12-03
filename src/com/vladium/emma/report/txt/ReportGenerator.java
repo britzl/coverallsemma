@@ -71,7 +71,7 @@ final class ReportGenerator extends AbstractReportGenerator
         if (trace1) start = System.currentTimeMillis ();
         
         {
-            m_queue = new LinkedList ();
+            m_queue = new LinkedList<IItem> ();
             for (m_queue.add (m_view.getRoot ()); ! m_queue.isEmpty (); )
             {
                 final IItem head = (IItem) m_queue.removeFirst ();
@@ -178,7 +178,7 @@ final class ReportGenerator extends AbstractReportGenerator
         {
             boolean headerDone = false;
             final ItemComparator order = m_typeSortComparators [PackageItem.getTypeMetadata ().getTypeID ()];                
-            for (Iterator packages = item.getChildren (order); packages.hasNext (); )
+            for (Iterator<IItem> packages = item.getChildren (order); packages.hasNext (); )
             {
                 final IItem pkg = (IItem) packages.next ();
                 
@@ -228,9 +228,9 @@ final class ReportGenerator extends AbstractReportGenerator
         {
             boolean headerDone = false;
             final ItemComparator order = m_typeSortComparators [m_srcView ? SrcFileItem.getTypeMetadata ().getTypeID () : ClassItem.getTypeMetadata ().getTypeID ()];                
-            for (Iterator srcORclsFiles = item.getChildren (order); srcORclsFiles.hasNext (); )
+            for (Iterator<IItem> srcORclsFiles = item.getChildren (order); srcORclsFiles.hasNext (); )
             {
-                final IItem srcORcls = (IItem) srcORclsFiles.next ();
+                final IItem srcORcls = srcORclsFiles.next ();
                 
                 if (! headerDone)
                 {
@@ -271,9 +271,9 @@ final class ReportGenerator extends AbstractReportGenerator
         {
             boolean headerDone = false;
             final ItemComparator order = m_typeSortComparators [ClassItem.getTypeMetadata ().getTypeID ()];                
-            for (Iterator classes = item.getChildren (order); classes.hasNext (); )
+            for (Iterator<IItem> classes = item.getChildren (order); classes.hasNext (); )
             {
-                final IItem cls = (IItem) classes.next ();
+                final IItem cls = classes.next ();
                 
                 if (! headerDone)
                 {
@@ -289,7 +289,7 @@ final class ReportGenerator extends AbstractReportGenerator
                 
                 // TODO: select the right comparator here
                 final ItemComparator order2 = m_typeSortComparators [MethodItem.getTypeMetadata ().getTypeID ()];                
-                for (Iterator methods = cls.getChildren (order2); methods.hasNext (); )
+                for (Iterator<IItem> methods = cls.getChildren (order2); methods.hasNext (); )
                 {
                     final MethodItem method = (MethodItem) methods.next ();
                     
@@ -322,9 +322,9 @@ final class ReportGenerator extends AbstractReportGenerator
         addTitleRow ("COVERAGE BREAKDOWN BY METHOD", 1, 1);
         {
             final ItemComparator order = m_typeSortComparators [MethodItem.getTypeMetadata ().getTypeID ()];                
-            for (Iterator methods = item.getChildren (order); methods.hasNext (); )
+            for (Iterator<IItem> methods = item.getChildren (order); methods.hasNext (); )
             {
-                final IItem method = (IItem) methods.next ();
+                final IItem method = methods.next ();
                 
                 // coverage row:
                 addItemRow (method, columns);                
@@ -523,7 +523,7 @@ final class ReportGenerator extends AbstractReportGenerator
     
     private char m_separator = '\t'; // TODO: set this
     
-    private LinkedList /* IITem */ m_queue;
+    private LinkedList<IItem> m_queue;
     private BufferedWriter m_out;
     
     private static final String TYPE = "txt";
