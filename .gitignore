@@ -5,3 +5,8 @@
 *.war
 *.ear
 /bin
+
+coverage.em
+
+coverage.ec
+/coverage/*

@@ -6,6 +6,27 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+{
+  "service_job_id": "1234567890",
+  "service_name": "travis-ci",
+  "source_files": [
+    {
+      "name": "example.rb",
+      "source": "def four\n  4\nend",
+      "coverage": [null, 1, null]
+    },
+    {
+      "name": "two.rb",
+      "source": "def seven\n  eight\n  nine\nend",
+      "coverage": [null, 1, 0, null]
+    }
+  ]
+}
+ * @author bjornritzl
+ *
+ */
 public class CoverallsReport {
 
 	public static class SourceFile {
