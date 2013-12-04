@@ -22,6 +22,7 @@ import com.vladium.emma.report.AbstractReportGenerator;
 import com.vladium.emma.report.AllItem;
 import com.vladium.emma.report.ClassItem;
 import com.vladium.emma.report.IItem;
+import com.vladium.emma.report.IReportProperties;
 import com.vladium.emma.report.ItemComparator;
 import com.vladium.emma.report.PackageItem;
 import com.vladium.emma.report.SourcePathCache;
@@ -53,6 +54,9 @@ implements IAppErrorCodes {
 		initialize(mdata, cdata, cache, properties);
 		
 		report = new CoverallsReport();
+		report.setRepoToken(properties.getProperty (IReportProperties.PREFIX.concat (TYPE).concat(".").concat("repotoken"), ""));
+		report.setServiceJobId(properties.getProperty (IReportProperties.PREFIX.concat (TYPE).concat(".").concat("service.jobid"), ""));
+		report.setServiceName(properties.getProperty (IReportProperties.PREFIX.concat (TYPE).concat(".").concat("service.name"), ""));
 
 		File outDir = m_settings.getOutDir();
 		if ((outDir == null) /* this should never happen */
