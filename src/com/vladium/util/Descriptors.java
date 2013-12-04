@@ -8,7 +8,6 @@
  */
 package com.vladium.util;
 
-import com.vladium.jcd.cls.IClassDefConstants;
 
 // ----------------------------------------------------------------------------
 /**

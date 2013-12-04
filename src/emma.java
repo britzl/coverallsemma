@@ -57,10 +57,7 @@ final class emma
     "emma usage: emma <command> [command options]," + EOL +
     "  where <command> is one of:" + EOL +
     EOL +
-    "   run     application runner {same as 'emmarun' tool};" + EOL +
-    "   instr   offline instrumentation processor;" + EOL +
     "   report  offline report generator;" + EOL +
-    "   merge   offline data file merge processor." + EOL +
     EOL +
     "  {use '<command> -h' to see usage help for a given command}" + EOL +
     EOL +

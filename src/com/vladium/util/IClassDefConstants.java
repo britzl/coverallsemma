@@ -6,7 +6,7 @@
  * 
  * $Id: IClassDefConstants.java,v 1.1.1.1 2004/05/09 16:57:46 vlad_r Exp $
  */
-package com.vladium.jcd.cls;
+package com.vladium.util;
 
 // ----------------------------------------------------------------------------
 /**
