@@ -11,7 +11,6 @@ import se.springworks.coveralls.CoverallsReport;
 import se.springworks.coveralls.CoverallsReport.SourceFile;
 import se.springworks.coveralls.SourceLoader;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,7 +82,6 @@ implements IAppErrorCodes {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		try {
-			String reportAsJson = mapper.writeValueAsString(report);
 			mapper.writeValue(outFile, report);
 		} catch (JsonProcessingException e) {
 			throw new EMMARuntimeException(e);
@@ -154,12 +152,15 @@ implements IAppErrorCodes {
 				if (lCoverageData != null) {
 					switch (lCoverageData.m_coverageStatus) {
 					case SrcFileItem.LineCoverageData.LINE_COVERAGE_ZERO:
+						sourceFile.setNoCoverage(l);
 						break;
 
 					case SrcFileItem.LineCoverageData.LINE_COVERAGE_PARTIAL:
+						sourceFile.addCoverage(l);
 						break;
 
 					case SrcFileItem.LineCoverageData.LINE_COVERAGE_COMPLETE:
+						sourceFile.addCoverage(l);
 						sourceFile.addCoverage(l);
 						break;
 

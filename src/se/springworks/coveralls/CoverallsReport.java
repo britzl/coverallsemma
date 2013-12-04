@@ -57,9 +57,11 @@ public class CoverallsReport {
 	        this.name = name;
 		}
 		
+		public void setNoCoverage(int line) {
+			coverage[line - 1] = 0;
+		}
+		
 		public void addCoverage(int line) {
-			System.out.println(line + " " + coverage);
-			System.out.println("covlen = " + coverage.length);
 			if(coverage[line - 1] == null) {
 				coverage[line - 1] = 0;
 			}
@@ -68,11 +70,14 @@ public class CoverallsReport {
 	}
 
 	
-	@JsonProperty
+	@JsonProperty(value="service_job_id")
 	private String serviceJobId;
 	
-	@JsonProperty
+	@JsonProperty("service_name")
 	private String serviceName;
+	
+	@JsonProperty("repo_token")
+	private String repoToken;
 	
 	@JsonProperty
 	private List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
@@ -88,5 +93,9 @@ public class CoverallsReport {
 	
 	public void setServiceName(String name) {
 		serviceName = name;
+	}
+	
+	public void setRepoToken(String token) {
+		repoToken = token;
 	}
 }

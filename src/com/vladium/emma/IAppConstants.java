@@ -9,7 +9,6 @@
 package com.vladium.emma;
 
 import com.vladium.app.IAppVersion;
-import com.vladium.jcd.lib.Types;
 
 // ----------------------------------------------------------------------------
 /**
@@ -28,8 +27,6 @@ interface IAppConstants extends IAppVersion
     String APP_VERBOSE_BUILD_ID = "[" + APP_NAME + " v" + APP_VERSION + ", build " + APP_BUILD_ID_AND_TAG + " (" + APP_BUILD_DATE + ")]";
     
     String APP_USAGE_PREFIX = APP_NAME + " usage: ";
-    
-    String APP_PACKAGE = Types.getClassPackageName (IAppConstants.class);
     
     long DATA_FORMAT_VERSION    = 0x20L;
 
