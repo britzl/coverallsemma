@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project name="emma-reports-coveralls" default="jar" basedir=".">
+
+	<target name="init" description="Initializes the build environment">
+		<mkdir dir="${basedir}/build"/>
+		<mkdir dir="${basedir}/build/out"/>
+	</target>
+
+	<target name="clean" description="Removes old build files">
+		<delete dir="${basedir}/build/"/>
+	</target>
+
+	<target name="build" depends="clean, init" description="Compiles all classes">
+		<javac
+			destdir="${basedir}/build/out"
+			source="1.6"
+			target="1.6"
+			optimize="false"
+			debug="false"
+			verbose="false"
+			includeantruntime="false"
+			encoding="UTF-8">
+			<classpath>
+				<fileset dir="${basedir}/libs">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<src path="${basedir}/src"/>
+		</javac>
+	</target>
+	
+	<target name="jar" depends="build" description="Creates an unobfuscated JAR">
+		<jar
+			basedir="${basedir}/build/out"
+			destfile="${basedir}/build/emmacoveralls.jar"
+			compress="false">
+			<fileset dir="${basedir}/res"/>
+			<zipfileset includes="**/*" src="${basedir}/libs/jackson-databind-2.1.1.jar"/>
+			<zipfileset includes="**/*" src="${basedir}/libs/jackson-core-2.1.1.jar"/>
+			<zipfileset includes="**/*" src="${basedir}/libs/jackson-annotations-2.1.1.jar"/>
+		</jar>
+	</target>
+</project>
