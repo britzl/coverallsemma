@@ -27,7 +27,7 @@ final class emma
         throws EMMARuntimeException
     {
     	
-    	args = ARGS;
+    	//args = ARGS;
     	
         // TODO: proper usage, arg validation, etc
         if ((args.length == 0) || args [0].startsWith ("-h"))
