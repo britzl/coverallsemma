@@ -79,7 +79,7 @@ public class CoverallsReport {
 	@JsonProperty("repo_token")
 	private String repoToken;
 	
-	@JsonProperty
+	@JsonProperty("source_files")
 	private List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
 	
 	
