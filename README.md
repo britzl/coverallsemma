@@ -7,7 +7,7 @@ usage
 -----
 This version of EMMA does only contain the report command. For instrumentation and other functions provided by EMMA please refer to the official build. The report is generated using the same syntax as the offical Emma report tool. Example:
 
-    java -cp emmacoveralls.jar emma report -r coveralls -in coverage.em,coverage.ec -sp src/ -Dreport.coveralls.service.jobid=$SERVICE_JOBID -Dreport.coveralls.service.name=$SERVICE_NAME -Dreport.coveralls.repotoken=$COVERALLS_REPO_TOKEN
+```java -cp emmacoveralls.jar emma report -r coveralls -in coverage.em,coverage.ec -sp src/ -Dreport.coveralls.service.jobid=$SERVICE_JOBID -Dreport.coveralls.service.name=$SERVICE_NAME -Dreport.coveralls.repotoken=$COVERALLS_REPO_TOKEN```
 
 Besides the standard parameters the Emma to Coveralls report converter need the following three properties:
 
